@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Laporan Penjualan Vape 2026 (Januari - November) | VapeSphere Analytics</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f5f3ff',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            },
+            accent: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              rose: '#f43f5e',
+              amber: '#f59e0b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <!-- Google Fonts & Font Awesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+    .glass-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .neon-glow {
+      box-shadow: 0 0 25px -5px rgba(139, 92, 246, 0.35);
+    }
+  </style>
+</head>
+
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased flex flex-col selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP NOTICE / AGE WARNING -->
+  <div class="bg-rose-950/60 border-b border-rose-900/40 text-rose-300 text-xs py-1.5 px-4 text-center font-medium flex items-center justify-center gap-2">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>Khusus 21+ • Produk Mengandung Nikotin • Data Rekapitulasi Internal Toko Vape (Januari – November)</span>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-cyan flex items-center justify-center text-white shadow-lg shadow-brand-500/20">
+          <i class="fa-solid fa-cloud text-xl"></i>
+        </div>
+        <div>
+          <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-brand-400 bg-clip-text text-transparent">VapeSphere</span>
+          <span class="text-xs ml-1.5 px-2 py-0.5 rounded-full bg-brand-500/20 border border-brand-500/30 text-brand-400 font-semibold uppercase">Dashboard 2026</span>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex items-center gap-3">
+        <div class="hidden sm:flex items-center gap-2 text-xs bg-slate-800/80 px-3 py-1.5 rounded-lg border border-slate-700/60 text-slate-300">
+          <i class="fa-regular fa-calendar-check text-brand-400"></i>
+          <span>Periode: <strong>Januari - November 2026</strong></span>
+        </div>
+
+        <button onclick="window.print()" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center gap-2">
+          <i class="fa-solid fa-print"></i>
+          <span class="hidden md:inline">Cetak Laporan</span>
+        </button>
+
+        <button onclick="exportCSV()" class="px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-brand-600 hover:bg-brand-500 text-white shadow-lg shadow-brand-600/30 transition flex items-center gap-2">
+          <i class="fa-solid fa-file-excel"></i>
+          <span>Export CSV</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- HERO SECTION -->
+    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/90 to-brand-950/40 p-6 md:p-8 border border-slate-800 shadow-2xl">
+      <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-brand-600/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-10 -top-10 w-80 h-80 bg-accent-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium mb-3">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Performa Penjualan Positif (+61.7% YTD)
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+            Ringkasan Penjualan Vape Tahun Ini
+          </h1>
+          <p class="mt-2 text-slate-400 max-w-2xl text-sm sm:text-base leading-relaxed">
+            Statistik dan evaluasi performa bisnis vape retail & grosir selama 11 bulan berjalan, mencakup tren omset bulanan, unit terjual, serta produk terlaris kategori Pod, Mod, dan Liquid.
+          </p>
+        </div>
+
+        <!-- Quick Info Widget -->
+        <div class="bg-slate-800/80 border border-slate-700/60 p-4 rounded-2xl flex items-center gap-4 min-w-[240px]">
+          <div class="w-12 h-12 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl">
+            <i class="fa-solid fa-chart-line"></i>
+          </div>
+          <div>
+            <div class="text-xs text-slate-400 font-medium">Bulan Terbaik</div>
+            <div class="text-lg font-bold text-white">November 2026</div>
+            <div class="text-xs text-emerald-400 font-semibold">Rp 182.000.000 (3.510 Unit)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <!-- Card 1: Total Omset -->
+      <div class="glass-card rounded-2xl p-5 hover:border-brand-500/40 transition duration-300">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Omset (Jan - Nov)</span>
+          <span class="w-9 h-9 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-rupiah-sign"></i>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl font-black text-white" id="statTotalOmset">Rp 1.621.900.000</div>
+          <div class="mt-1 flex items-center text-xs text-emerald-400 gap-1.5 font-medium">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+            <span>+61.7% dibandingkan bulan Januari</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Total Unit Terjual -->
+      <div class="glass-card rounded-2xl p-5 hover:border-accent-cyan/40 transition duration-300">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Unit Terjual</span>
+          <span class="w-9 h-9 rounded-xl bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-boxes-stacked"></i>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl font-black text-white" id="statTotalUnit">31.160 <span class="text-base font-normal text-slate-400">Unit</span></div>
+          <div class="mt-1 flex items-center text-xs text-slate-400 gap-1.5 font-medium">
+            <i class="fa-regular fa-clock"></i>
+            <span>Rata-rata 2.832 unit/bulan</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Rata-rata Penjualan -->
+      <div class="glass-card rounded-2xl p-5 hover:border-accent-emerald/40 transition duration-300">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Rata-rata Omset Bulanan</span>
+          <span class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-scale-balanced"></i>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl font-black text-white" id="statRataRata">Rp 147.445.454</div>
+          <div class="mt-1 flex items-center text-xs text-brand-400 gap-1.5 font-medium">
+            <i class="fa-solid fa-bullseye"></i>
+            <span>108% dari target minimum</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4: Kategori Unggulan -->
+      <div class="glass-card rounded-2xl p-5 hover:border-accent-amber/40 transition duration-300">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Kategori Paling Diminati</span>
+          <span class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-sm">
+            <i class="fa-solid fa-fire"></i>
+          </span>
+        </div>
+        <div class="mt-3">
+          <div class="text-2xl font-black text-white">Pod Kits & Saltnic</div>
+          <div class="mt-1 flex items-center text-xs text-amber-400 gap-1.5 font-medium">
+            <i class="fa-solid fa-pie-chart"></i>
+            <span>Menguasai 70% total transaksi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHARTS SECTION -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <!-- Main Trend Chart (2 cols on large screen) -->
+      <div class="glass-card rounded-3xl p-6 lg:col-span-2 flex flex-col justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+          <div>
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+              <i class="fa-solid fa-chart-column text-brand-400"></i>
+              Tren Penjualan Bulanan (Januari - November)
+            </h2>
+            <p class="text-xs text-slate-400">Grafik omset pendapatan (Rupiah) dan volume barang per bulan</p>
+          </div>
+          <!-- Toggle Chart Metric -->
+          <div class="flex items-center gap-1 bg-slate-800 p-1 rounded-xl text-xs font-semibold">
+            <button id="btnMetricRevenue" onclick="switchChartMode('revenue')" class="px-3 py-1.5 rounded-lg bg-brand-600 text-white transition">Omset (Rp)</button>
+            <button id="btnMetricUnits" onclick="switchChartMode('units')" class="px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition">Unit Terjual</button>
+          </div>
+        </div>
+
+        <div class="relative w-full h-[320px]">
+          <canvas id="monthlyTrendChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Category Share Doughnut (1 col on large screen) -->
+      <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
+        <div class="mb-4">
+          <h2 class="text-lg font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-chart-pie text-accent-cyan"></i>
+            Proporsi Kategori Produk
+          </h2>
+          <p class="text-xs text-slate-400">Kontribusi penjualan berdasarkan tipe produk vape</p>
+        </div>
+
+        <div class="relative w-full h-[240px] flex items-center justify-center">
+          <canvas id="categoryDoughnutChart"></canvas>
+        </div>
+
+        <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-300">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-brand-500"></span>
+            <span>Pod Kits (38%)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-cyan-400"></span>
+            <span>Liquid Saltnic (32%)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+            <span>Liquid Freebase (18%)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+            <span>Coil & Cartridge (12%)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOP SELLING PRODUCTS CAROUSEL / CARDS -->
+    <div>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-crown text-amber-400"></i>
+            Top 4 Produk Paling Laris Sepanjang 2026
+          </h2>
+          <p class="text-xs text-slate-400">Perangkat dan liquid dengan perputaran penjualan tercepat</p>
+        </div>
+        <span class="text-xs text-slate-400 italic">*Berdasarkan akumulasi data Januari - November</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <!-- Item 1 -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-brand-500/50 transition duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between">
+              <span class="px-2.5 py-0.5 rounded-full bg-brand-500/20 text-brand-400 text-[10px] font-bold uppercase tracking-wider">Device / Pod</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-star"></i> 4.9</span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-3">OXVA Xlim Pro 2</h3>
+            <p class="text-xs text-slate-400 mt-1">Pod kit rechargeable dengan smart screen & airflow presisi.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-slate-400">Terjual (Jan-Nov)</div>
+              <div class="text-sm font-extrabold text-white">4.820 pcs</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-slate-400">Omset</div>
+              <div class="text-sm font-extrabold text-emerald-400">Rp 1.446 Jt</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-cyan-500/50 transition duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between">
+              <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-400 text-[10px] font-bold uppercase tracking-wider">Liquid Saltnic</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-3">FOOM Liquid Tea Series</h3>
+            <p class="text-xs text-slate-400 mt-1">Varian Iced Tea 30ml 30mg dengan sensasi dingin menyegarkan.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-slate-400">Terjual (Jan-Nov)</div>
+              <div class="text-sm font-extrabold text-white">7.450 botol</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-slate-400">Omset</div>
+              <div class="text-sm font-extrabold text-emerald-400">Rp 819.5 Jt</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-amber-500/50 transition duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between">
+              <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-400 text-[10px] font-bold uppercase tracking-wider">Liquid Freebase</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-star"></i> 4.7</span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-3">Oat Drips V1 Original 60ml</h3>
+            <p class="text-xs text-slate-400 mt-1">Rasa sereal susu legendaris dengan throat hit halus.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-slate-400">Terjual (Jan-Nov)</div>
+              <div class="text-sm font-extrabold text-white">3.190 botol</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-slate-400">Omset</div>
+              <div class="text-sm font-extrabold text-emerald-400">Rp 462.5 Jt</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="glass-card rounded-2xl p-5 border border-slate-800 hover:border-emerald-500/50 transition duration-300 flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between">
+              <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-bold uppercase tracking-wider">Device / Pod</span>
+              <span class="text-amber-400 text-xs font-bold"><i class="fa-solid fa-star"></i> 4.8</span>
+            </div>
+            <h3 class="text-base font-bold text-white mt-3">Uwell Caliburn G3 Lite</h3>
+            <p class="text-xs text-slate-400 mt-1">Pod entry-level dengan cartridge anti-leaking Pro-FOCS.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] text-slate-400">Terjual (Jan-Nov)</div>
+              <div class="text-sm font-extrabold text-white">3.980 pcs</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] text-slate-400">Omset</div>
+              <div class="text-sm font-extrabold text-emerald-400">Rp 696.5 Jt</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATA TABLE SECTION -->
+    <div class="glass-card rounded-3xl p-6 border border-slate-800">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <i class="fa-solid fa-table-list text-brand-400"></i>
+            Tabel Rekapitulasi Bulanan (Januari - November)
+          </h2>
+          <p class="text-xs text-slate-400">Detail transaksi, target ketercapaian, dan produk terlaris tiap bulan</p>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <!-- Search / Filter input -->
+          <div class="relative">
+            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+            <input 
+              type="text" 
+              id="searchInput" 
+              onkeyup="filterTable()" 
+              placeholder="Cari bulan / produk..." 
+              class="bg-slate-900 border border-slate-700 rounded-xl pl-8 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-500 transition w-48 sm:w-64"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Table responsive container -->
+      <div class="overflow-x-auto rounded-2xl border border-slate-800">
+        <table class="w-full text-left text-xs sm:text-sm text-slate-300" id="salesTable">
+          <thead class="bg-slate-900/90 text-slate-400 uppercase font-bold text-[11px] tracking-wider border-b border-slate-800">
+            <tr>
+              <th scope="col" class="py-3.5 px-4">Bulan</th>
+              <th scope="col" class="py-3.5 px-4 text-center">Unit Terjual</th>
+              <th scope="col" class="py-3.5 px-4 text-right">Total Transaksi</th>
+              <th scope="col" class="py-3.5 px-4 text-right">Total Omset (IDR)</th>
+              <th scope="col" class="py-3.5 px-4">Produk Terlaris Bulan Ini</th>
+              <th scope="col" class="py-3.5 px-4 text-center">Status Target</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60 font-medium">
+            <!-- Row 1 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Januari
+              </td>
+              <td class="py-3.5 px-4 text-center">2.150 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">1.480 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 112.500.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">OXVA Xlim Pro</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (102%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 2 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Februari
+              </td>
+              <td class="py-3.5 px-4 text-center">2.380 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">1.620 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 124.000.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">FOOM Apple Burst</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (105%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 3 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Maret
+              </td>
+              <td class="py-3.5 px-4 text-center">2.650 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">1.790 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 138.500.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Caliburn G3</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (110%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 4 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> April
+              </td>
+              <td class="py-3.5 px-4 text-center">2.790 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">1.940 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 145.200.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Oat Drips V1 60ml</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (114%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 5 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Mei
+              </td>
+              <td class="py-3.5 px-4 text-center">2.510 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">1.710 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 130.000.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Tokyo Banana Liquid</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold">Mencapai Target (100%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 6 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Juni
+              </td>
+              <td class="py-3.5 px-4 text-center">2.730 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">1.860 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 142.800.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Ursa Nano Pro 2</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (108%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 7 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Juli
+              </td>
+              <td class="py-3.5 px-4 text-center">2.980 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">2.050 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 155.000.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">FOOM Iced Tea</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (115%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 8 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Agustus
+              </td>
+              <td class="py-3.5 px-4 text-center">3.120 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">2.180 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 162.400.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">OXVA Xlim Pro 2</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (118%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 9 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> September
+              </td>
+              <td class="py-3.5 px-4 text-center">3.040 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">2.110 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 158.000.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Lunar Sweet Mango</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (113%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 10 -->
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3.5 px-4 font-semibold text-white flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-brand-400"></span> Oktober
+              </td>
+              <td class="py-3.5 px-4 text-center">3.300 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">2.310 trx</td>
+              <td class="py-3.5 px-4 text-right font-bold text-white font-mono">Rp 171.500.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">Cartridge OXVA V3</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-semibold">Tercapai (120%)</span>
+              </td>
+            </tr>
+
+            <!-- Row 11 -->
+            <tr class="hover:bg-slate-800/40 transition bg-brand-950/20">
+              <td class="py-3.5 px-4 font-semibold text-brand-300 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-accent-cyan animate-ping"></span> November
+              </td>
+              <td class="py-3.5 px-4 text-center font-bold text-white">3.510 pcs</td>
+              <td class="py-3.5 px-4 text-right font-mono">2.490 trx</td>
+              <td class="py-3.5 px-4 text-right font-extrabold text-accent-cyan font-mono">Rp 182.000.000</td>
+              <td class="py-3.5 px-4">
+                <span class="px-2 py-0.5 rounded bg-brand-900/60 text-brand-300 border border-brand-700 font-semibold">OXVA Xlim Pro 2 New Color</span>
+              </td>
+              <td class="py-3.5 px-4 text-center">
+                <span class="px-2.5 py-1 rounded-full bg-accent-cyan/20 text-cyan-300 text-xs font-bold border border-cyan-500/30">Rekor Tertinggi (126%)</span>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot class="bg-slate-900 font-bold border-t-2 border-slate-700 text-white">
+            <tr>
+              <td class="py-4 px-4 text-brand-400 uppercase tracking-wider">TOTAL (11 Bulan)</td>
+              <td class="py-4 px-4 text-center">31.160 pcs</td>
+              <td class="py-4 px-4 text-right font-mono">21.540 trx</td>
+              <td class="py-4 px-4 text-right text-emerald-400 font-mono text-base">Rp 1.621.900.000</td>
+              <td class="py-4 px-4 text-slate-400 font-normal">Top Device: OXVA Series</td>
+              <td class="py-4 px-4 text-center text-emerald-400">112% Average</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- BUSINESS INSIGHT & RECOMMENDATIONS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-brand-500">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-lightbulb text-amber-400"></i>
+          Insight Tren Pasar 2026
+        </h3>
+        <ul class="mt-3 space-y-2 text-xs sm:text-sm text-slate-300">
+          <li class="flex items-start gap-2">
+            <span class="text-brand-400 mt-1">•</span>
+            <span><strong>Transisi ke Simple Pod:</strong> Konsumen semakin menyukai pod system ringkas (0.6 - 0.8 ohm) dengan pengisian daya Type-C cepat dibanding Mod berukuran besar.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-400 mt-1">•</span>
+            <span><strong>Dominasi Liquid Dingin (Fruity Mint):</strong> Saltnic rasa fruity icy menyumbang lebih dari 65% total penjualan liquid karena digemari vaper harian.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-brand-400 mt-1">•</span>
+            <span><strong>Puncak Penjualan November:</strong> Kenaikan di bulan November didorong oleh event promo awal akhir tahun dan peluncuran varian warna baru OXVA.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="glass-card rounded-2xl p-6 border-l-4 border-accent-cyan">
+        <h3 class="text-base font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-bullhorn text-accent-cyan"></i>
+          Rencana Strategis Bulan Desember
+        </h3>
+        <ul class="mt-3 space-y-2 text-xs sm:text-sm text-slate-300">
+          <li class="flex items-start gap-2">
+            <span class="text-cyan-400 mt-1">•</span>
+            <span><strong>Bundling Holiday Package:</strong> Menyiapkan paket hemat pod kit + 1 botol saltnic + 1 pack cartridge untuk promo Natal & Tahun Baru.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-cyan-400 mt-1">•</span>
+            <span><strong>Stok Cartridge Cadangan:</strong> Menambah kuota pemesanan cartridge 0.6 ohm sebesar 30% untuk mengantisipasi lonjakan libur akhir tahun.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-cyan-400 mt-1">•</span>
+            <span><strong>Target Akhir Tahun:</strong> Memproyeksikan omset Desember tembus Rp 200.000.000 dengan total tahunan mencapai Rp 1,82 Miliar.</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-8 text-center text-xs text-slate-500">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2 text-slate-400">
+        <i class="fa-solid fa-shield-halved text-brand-400"></i>
+        <span>VapeSphere Store Analytics • Hak Cipta Dilindungi &copy; 2026</span>
+      </div>
+      <div class="text-slate-400">
+        Dibuat untuk visualisasi data penjualan vape Januari hingga November
+      </div>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC & CHARTS -->
+  <script>
+    // Data Penjualan Januari - November
+    const months = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+      'Juli', 'Agustus', 'September', 'Oktober', 'November'
+    ];
+    
+    const revenueData = [
+      112500000, 124000000, 138500000, 145200000, 130000000, 142800000,
+      155000000, 162400000, 158000000, 171500000, 182000000
+    ];
+
+    const unitData = [
+      2150, 2380, 2650, 2790, 2510, 2730,
+      2980, 3120, 3040, 3300, 3510
+    ];
+
+    let currentMetric = 'revenue';
+    let trendChartInstance = null;
+
+    // Inisialisasi Grafik Garis & Bar
+    function initTrendChart() {
+      const ctx = document.getElementById('monthlyTrendChart').getContext('2d');
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+      gradient.addColorStop(0, 'rgba(139, 92, 246, 0.45)');
+      gradient.addColorStop(1, 'rgba(139, 92, 246, 0.0)');
+
+      trendChartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Omset Penjualan (IDR)',
+            data: revenueData,
+            borderColor: '#8b5cf6',
+            backgroundColor: gradient,
+            borderWidth: 3,
+            fill: true,
+            tension: 0.38,
+            pointBackgroundColor: '#c4b5fd',
+            pointBorderColor: '#6d28d9',
+            pointRadius: 5,
+            pointHoverRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: '#0f172a',
+              titleColor: '#e2e8f0',
+              bodyColor: '#38bdf8',
+              borderColor: '#334155',
+              borderWidth: 1,
+              padding: 12,
+              callbacks: {
+                label: function(context) {
+                  if (currentMetric === 'revenue') {
+                    return ' Omset: Rp ' + context.parsed.y.toLocaleString('id-ID');
+                  } else {
+                    return ' Terjual: ' + context.parsed.y.toLocaleString('id-ID') + ' pcs';
+                  }
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: '#94a3b8',
+                font: { size: 11 }
+              }
+            },
+            y: {
+              grid: {
+                color: 'rgba(255, 255, 255, 0.05)'
+              },
+              ticks: {
+                color: '#94a3b8',
+                font: { size: 11 },
+                callback: function(value) {
+                  if (currentMetric === 'revenue') {
+                    return 'Rp ' + (value / 1000000) + ' Jt';
+                  } else {
+                    return value.toLocaleString('id-ID');
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Toggle Tampilan Grafik (Omset vs Unit)
+    function switchChartMode(mode) {
+      currentMetric = mode;
+      const btnRev = document.getElementById('btnMetricRevenue');
+      const btnUnits = document.getElementById('btnMetricUnits');
+
+      if (mode === 'revenue') {
+        btnRev.className = "px-3 py-1.5 rounded-lg bg-brand-600 text-white transition";
+        btnUnits.className = "px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
+        
+        trendChartInstance.data.datasets[0].label = 'Omset Penjualan (IDR)';
+        trendChartInstance.data.datasets[0].data = revenueData;
+        trendChartInstance.data.datasets[0].borderColor = '#8b5cf6';
+        trendChartInstance.data.datasets[0].pointBorderColor = '#6d28d9';
+      } else {
+        btnUnits.className = "px-3 py-1.5 rounded-lg bg-accent-cyan text-slate-950 font-bold transition";
+        btnRev.className = "px-3 py-1.5 rounded-lg text-slate-400 hover:text-white transition";
+
+        trendChartInstance.data.datasets[0].label = 'Unit Terjual (pcs)';
+        trendChartInstance.data.datasets[0].data = unitData;
+        trendChartInstance.data.datasets[0].borderColor = '#06b6d4';
+        trendChartInstance.data.datasets[0].pointBorderColor = '#0891b2';
+      }
+      trendChartInstance.update();
+    }
+
+    // Inisialisasi Donut Chart Kategori
+    function initCategoryChart() {
+      const ctx = document.getElementById('categoryDoughnutChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Pod Kits', 'Liquid Saltnic', 'Liquid Freebase', 'Coil & Cartridge'],
+          datasets: [{
+            data: [38, 32, 18, 12],
+            backgroundColor: [
+              '#8b5cf6', // Brand purple
+              '#06b6d4', // Cyan
+              '#f59e0b', // Amber
+              '#10b981'  // Emerald
+            ],
+            borderColor: '#0f172a',
+            borderWidth: 4,
+            hoverOffset: 6
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '70%',
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              callbacks: {
+                label: function(item) {
+                  return ` ${item.label}: ${item.parsed}%`;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    // Filter Table Search
+    function filterTable() {
+      const input = document.getElementById("searchInput");
+      const filter = input.value.toLowerCase();
+      const table = document.getElementById("salesTable");
+      const tr = table.getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+
+      for (let i = 0; i < tr.length; i++) {
+        const textContent = tr[i].textContent || tr[i].innerText;
+        if (textContent.toLowerCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+
+    // Export Data ke CSV
+    function exportCSV() {
+      let csv = "Bulan,Unit Terjual,Total Transaksi,Total Omset (IDR),Produk Terlaris\n";
+      const rows = [
+        ["Januari", "2150", "1480", "112500000", "OXVA Xlim Pro"],
+        ["Februari", "2380", "1620", "124000000", "FOOM Apple Burst"],
+        ["Maret", "2650", "1790", "138500000", "Caliburn G3"],
+        ["April", "2790", "1940", "145200000", "Oat Drips V1 60ml"],
+        ["Mei", "2510", "1710", "130000000", "Tokyo Banana Liquid"],
+        ["Juni", "2730", "1860", "142800000", "Ursa Nano Pro 2"],
+        ["Juli", "2980", "2050", "155000000", "FOOM Iced Tea"],
+        ["Agustus", "3120", "2180", "162400000", "OXVA Xlim Pro 2"],
+        ["September", "3040", "2110", "158000000", "Lunar Sweet Mango"],
+        ["Oktober", "3300", "2310", "171500000", "Cartridge OXVA V3"],
+        ["November", "3510", "2490", "182000000", "OXVA Xlim Pro 2 New Color"]
+      ];
+
+      rows.forEach(function(row) {
+        csv += row.join(",") + "\n";
+      });
+
+      const hiddenElement = document.createElement('a');
+      hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+      hiddenElement.target = '_blank';
+      hiddenElement.download = 'Laporan_Penjualan_Vape_Januari-November_2026.csv';
+      hiddenElement.click();
+    }
+
+    // Run on Load
+    window.addEventListener('DOMContentLoaded', () => {
+      initTrendChart();
+      initCategoryChart();
+    });
+  </script>
+</body>
+</html>
